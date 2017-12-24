@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { getDecks } from '../utils/api';
 import { connect } from 'react-redux';
 import { receiveDecks } from '../actions';
@@ -22,14 +22,34 @@ class DeckList extends Component {
 
     }
 
+    renderItem = (item) => {
+        return (
+            <Text>{item.title}</Text>
+        )
+    }
+
     render () {
-        console.log('this.props', this.props)
+        // console.log('this.props.navigation.navigate', this.props.navigation.navigate)
+        const { decks } = this.props;
         return (
             <View>
                 <Text>
                     All Decks
-                    {JSON.stringify(this.props.decks)}
                 </Text>
+                <View>
+                    { Object.keys(decks).map((key) => {
+                        const deck = decks[key]
+                        return (
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate(
+                                'DeckDetails',
+                                { deckId: key }
+                                )} key={key}>
+                                <Text>{deck.title}</Text>
+                            </TouchableOpacity>
+                        )
+                    })}
+                </View>
+
             </View>
         )
     }
@@ -43,19 +63,9 @@ const mapStateToProps = (decks) => {
 }
 
 export default connect(mapStateToProps)(DeckList)
-// export default DeckList
 
-  // componentDidMount () {
-  //   const { dispatch } = this.props
 
-  //   fetchCalendarResults()
-  //     .then((entries) => dispatch(receiveEntries(entries)))
-  //     .then(({ entries }) => {
-  //       if (!entries[timeToString()]) {
-  //         dispatch(addEntry({
-  //           [timeToString()]: getDailyReminderValue()
-  //         }))
-  //       }
-  //     })
-  //     .then(() => this.setState(() => ({ready: true})))
-  // }
+/*            onPress={() => this.props.navigation.navigate(
+              'EntryDetail',
+              { entryId: key }
+            )}*/
