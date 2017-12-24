@@ -56,7 +56,6 @@ class DeckList extends Component {
 }
 
 const mapStateToProps = (decks) => {
-    console.log('decks in mapStateToProps', decks)
     return {
         decks
     }
