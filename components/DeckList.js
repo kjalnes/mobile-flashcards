@@ -14,10 +14,7 @@ class DeckList extends Component {
         const { dispatch } = this.props;
 
         getDecks()
-            .then( decks => {
-                // console.log('decks', decks)
-                return dispatch(receiveDecks(decks))
-            })
+            .then( decks => dispatch(receiveDecks(decks)))
             .then(() => this.setState(() => ({ready: true})))
 
     }
@@ -29,8 +26,8 @@ class DeckList extends Component {
     }
 
     render () {
-        // console.log('this.props.navigation.navigate', this.props.navigation.navigate)
         const { decks } = this.props;
+
         return (
             <View>
                 <Text>
@@ -62,9 +59,3 @@ const mapStateToProps = (decks) => {
 }
 
 export default connect(mapStateToProps)(DeckList)
-
-
-/*            onPress={() => this.props.navigation.navigate(
-              'EntryDetail',
-              { entryId: key }
-            )}*/

@@ -5,16 +5,46 @@ import { white, purple } from '../utils/colors';
 
 
 class Card extends Component {
+    state = {
+        showAnswer:false
+    }
+
+    toggleShowAnswer = () => {
+        console.log(this.state)
+        this.setState({showAnswer: !this.state.showAnswer});
+    }
+
+
+    calcScore(answer) {
+        this.setState({showAnswer: false});
+        this.props.calcScore(answer);
+    }
+
+
+
     render() {
-        const { card } = this.props;
+        const { card, title, calcScore } = this.props;
         return (
             <View>
-                <Text>{card.question}</Text>
-                <Text>{card.answer}</Text>
+                {!this.state.showAnswer
+                 ?  <View>
+                        <Text>{card.question}</Text>
+                    </View>
+                 : <Text>{card.answer}</Text>
+                }
+                <TouchableOpacity
+                    onPress={() => this.toggleShowAnswer()}>
+                    <Text>{this.state.showAnswer ? 'Question' : 'Answer'}</Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.deckBtn}
-                    onPress={() => console.log('clicked')}>
-                    <Text style={styles.btnText}>Answer</Text>
+                    onPress={() => this.calcScore(true)}>
+                    <Text style={styles.btnText}>Correct</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.deckBtn}
+                    onPress={() => this.calcScore(false)}>
+                    <Text style={styles.btnText}>Incorrect</Text>
                 </TouchableOpacity>
             </View>
         )

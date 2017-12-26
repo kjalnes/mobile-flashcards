@@ -12,11 +12,11 @@ class Quiz extends Component {
     state = {
         cardCount: 1,
         cardId: 0,
-        score: 0
+        score: 0,
+
     }
 
     static navigationOptions = ({ navigation }) => {
-        // const { title } = navigation.state.params
         return {
             title: 'Quiz',
             headerTintColor: white,
@@ -26,18 +26,37 @@ class Quiz extends Component {
         }
     }
 
+    calcScore(correct) {
+        if(correct) {
+            this.setState({score: this.state.score+1})
+        }
+
+        this.setState({
+            cardId: this.state.cardId+1,
+            cardCount: this.state.cardCount+1,
+            showAnswer: false
+        });
+    }
+
+    componentDidMount() {
+    }
+
     render() {
-        const { deck } = this.props;
+        const { deck, title } = this.props;
+        const { score, cardCount, cardId } = this.state;
+        const totalQuestions = deck.questions.length;
+
         return (
             <View>
-                <Text>{deck.questions.length} card{deck.questions.length > 1 || deck.questions.length < 1 ? 's' : ''}</Text>
-                {deck.questions.map((card, key) => {                    return (
-                        <View key={key}>
-                            <Text>{this.state.cardCount} / {deck.questions.length}</Text>
-                            <Card card={card} />
-                        </View>
-                    )
-                })}
+                <Text>{totalQuestions} card{totalQuestions > 1 || totalQuestions < 1 ? 's' : ''}</Text>
+                <View>
+                    {cardCount <= totalQuestions
+                        ?   <View>
+                                <Text>{cardCount } / {totalQuestions}</Text>
+                                <Card card={deck.questions[cardId]} title={title} calcScore={this.calcScore.bind(this)} />
+                            </View>
+                        :   <Text>You're total score is {score/totalQuestions*100}%</Text>}
+                </View>
             </View>
         )
     }
@@ -47,6 +66,7 @@ class Quiz extends Component {
 function mapStateToProps (state, { navigation }) {
     const { title } = navigation.state.params
     return {
+        title,
         deck: state[title],
     }
 }
