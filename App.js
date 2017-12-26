@@ -10,6 +10,8 @@ import { TabNavigator, StackNavigator } from 'react-navigation'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { purple, white } from './utils/colors'
 import { Constants } from 'expo'
+import Quiz from './components/Quiz'
+import AddQuestion from './components/AddQuestion'
 
 
 
@@ -58,18 +60,24 @@ const Tabs = TabNavigator({
 
 
 const MainNavigator = StackNavigator({
-  Home: {
-    screen: Tabs,
-  },
-  DeckDetails: {
-    screen: DeckDetails,
-    navigationOptions: {
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple,
-      }
+    Home: {
+        screen: Tabs,
+    },
+    DeckDetails: {
+        screen: DeckDetails,
+        navigationOptions: {
+            headerTintColor: white,
+            headerStyle: {
+                backgroundColor: purple,
+            }
+        }
+    },
+    Quiz: {
+        screen: Quiz
+    },
+    AddQuestion: {
+        screen: AddQuestion
     }
-  }
 })
 
 

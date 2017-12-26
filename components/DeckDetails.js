@@ -1,44 +1,68 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { StyleSheet, Text, View, Platform, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { white, purple } from '../utils/colors';
+import Quiz from './Quiz';
+
+
 
 class DeckDetails extends Component {
     static navigationOptions = ({ navigation }) => {
-        const { deckId } = navigation.state.params
+        const { title } = navigation.state.params
 
         return {
-            title: deckId
+            title: title
         }
     }
 
     render() {
-        // console.log('this.props', this.props)
         const { deck } = this.props;
-        // console.log('deck', deck)
+
         return (
             <View>
-                {deck.questions.map((_question, key) => {
-                    const { question, answer } = _question;
-                    return (
-                        <View key={key}>
-                            <Text>{question}</Text>
-                            <Text>{answer}</Text>
-                        </View>
-                    )
-                })}
+                <Text>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
+                <TouchableOpacity
+                    style={styles.deckBtn}
+                    onPress={() => this.props.navigation.navigate(
+                    'Quiz',
+                    { title: deck.title })}>
+                    <Text style={styles.btnText}>START QUIZ</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.deckBtn}
+                    onPress={() => this.props.navigation.navigate(
+                    'AddQuestion',
+                    { title: deck.title })}>
+                    <Text style={styles.btnText}>ADD QUESTION</Text>
+                </TouchableOpacity>
             </View>
       )
     }
 }
 
 function mapStateToProps (state, { navigation }) {
-  const { deckId } = navigation.state.params
-  // console.log('state[deckId]', state[deckId])
-  return {
-    deckId,
-    deck: state[deckId],
-  }
+    const { title } = navigation.state.params;
+    return {
+        deck: state[title],
+    }
 }
 
+const styles = StyleSheet.create({
+    deckBtn: {
+        backgroundColor: purple,
+        padding: 10,
+        borderRadius: 7,
+        height: 45,
+        marginLeft: 40,
+        marginRight: 40,
+        marginTop: 10,
+        marginBottom: 10
+    },
+    btnText: {
+        color: white,
+        fontSize: 22,
+        textAlign: 'center',
+    },
+})
 
 export default connect(mapStateToProps)(DeckDetails)

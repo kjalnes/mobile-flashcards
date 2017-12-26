@@ -34,17 +34,17 @@ class DeckList extends Component {
         return (
             <View>
                 <Text>
-                    All Decks
+                    Decks
                 </Text>
                 <View>
                     { Object.keys(decks).map((key) => {
                         const deck = decks[key]
                         return (
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate(
+                            <TouchableOpacity key={key} onPress={() => this.props.navigation.navigate(
                                 'DeckDetails',
-                                { deckId: key }
-                                )} key={key}>
+                                { title: key })}>
                                 <Text>{deck.title}</Text>
+                                <Text>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
                             </TouchableOpacity>
                         )
                     })}
