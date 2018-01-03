@@ -20,7 +20,7 @@ class DeckDetails extends Component {
 
         return (
             <View>
-                <Text>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
+                <Text style={styles.cardText}>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
                 <TouchableOpacity
                     style={styles.deckBtn}
                     onPress={() => this.props.navigation.navigate(
@@ -48,6 +48,11 @@ function mapStateToProps (state, { navigation }) {
 }
 
 const styles = StyleSheet.create({
+    cardText: {
+        fontSize: 18,
+        textAlign: 'center',
+        padding: 20
+    },
     deckBtn: {
         backgroundColor: purple,
         padding: 10,

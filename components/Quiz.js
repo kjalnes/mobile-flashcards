@@ -5,9 +5,6 @@ import { white, purple } from '../utils/colors';
 import Card from './Card';
 
 
-/* may not need a connected component here
-instead potentially send the whole deck down with navigation */
-
 class Quiz extends Component {
     state = {
         cardCount: 1,
@@ -48,14 +45,16 @@ class Quiz extends Component {
 
         return (
             <View>
-                <Text>{totalQuestions} card{totalQuestions > 1 || totalQuestions < 1 ? 's' : ''}</Text>
-                <View>
+                <View style={styles.container}>
                     {cardCount <= totalQuestions
                         ?   <View>
                                 <Text>{cardCount } / {totalQuestions}</Text>
                                 <Card card={deck.questions[cardId]} title={title} calcScore={this.calcScore.bind(this)} />
                             </View>
-                        :   <Text>You're total score is {score/totalQuestions*100}%</Text>}
+
+                        :   <View>
+                                <Text style={styles.score}>You're total score is {score/totalQuestions*100}%</Text>
+                            </View>}
                 </View>
             </View>
         )
@@ -71,4 +70,15 @@ function mapStateToProps (state, { navigation }) {
     }
 }
 
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'flex-end'
+    },
+    score: {
+        fontSize: 34,
+        textAlign:'center'
+    }
+})
 export default connect(mapStateToProps)(Quiz);

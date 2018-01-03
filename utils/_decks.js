@@ -1,5 +1,4 @@
 import { AsyncStorage } from 'react-native'
-// import { getMetricMetaInfo, timeToString } from './helpers'
 
 export const DECK_STORAGE_KEY = 'Mobile-Flashcards:decks'
 
@@ -42,6 +41,15 @@ function setDummyData () {
                 }
            ]
         },
+        Redux: {
+            title: 'Redux',
+            questions: [
+                {
+                    question: 'What is a redux store?',
+                    answer: 'A store holds the whole state tree of your application. The only way to change the state inside it is to dispatch an action on it.'
+                }
+           ]
+        },
     }
 
   AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(dummyData))
@@ -52,7 +60,7 @@ function setDummyData () {
 
 
 export function formatResults (results) {
-  console.log('results', results)
+  // console.log('results', results)
   return results === null
     ? setDummyData()
     : JSON.parse(results)

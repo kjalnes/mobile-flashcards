@@ -25,16 +25,15 @@ class Card extends Component {
     render() {
         const { card, title, calcScore } = this.props;
         return (
-            <View>
+            <View style={styles.container}>
                 {!this.state.showAnswer
-                 ?  <View>
-                        <Text>{card.question}</Text>
-                    </View>
-                 : <Text>{card.answer}</Text>
+                 ? <Text style={[styles.item, styles.itemText]}>{card.question}</Text>
+                 : <Text style={[styles.item, styles.itemText]}>{card.answer}</Text>
                 }
                 <TouchableOpacity
+                    style={styles.item}
                     onPress={() => this.toggleShowAnswer()}>
-                    <Text>{this.state.showAnswer ? 'Question' : 'Answer'}</Text>
+                    <Text style={{textAlign: 'center'}}>{this.state.showAnswer ? 'Question' : 'Answer'}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.deckBtn}
@@ -52,6 +51,20 @@ class Card extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        padding: 20
+
+    },
+    itemText: {
+        fontSize: 20,
+        textAlign: 'center'
+    },
+    item: {
+        height: 50,
+        margin: 20,
+    },
     deckBtn: {
         backgroundColor: purple,
         padding: 10,
