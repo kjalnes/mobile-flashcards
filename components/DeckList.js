@@ -27,21 +27,22 @@ class DeckList extends Component {
 
     render () {
         const { decks } = this.props;
+        console.log(decks)
 
         return (
-            <View>
-                <Text>
+            <View style={styles.content}>
+                <Text style={styles.title}>
                     Decks
                 </Text>
-                <View>
+                <View style={styles.deckContainer}>
                     { Object.keys(decks).map((key) => {
                         const deck = decks[key]
                         return (
-                            <TouchableOpacity key={key} onPress={() => this.props.navigation.navigate(
+                            <TouchableOpacity style={styles.deck} key={key} onPress={() => this.props.navigation.navigate(
                                 'DeckDetails',
                                 { title: key })}>
-                                <Text>{deck.title}</Text>
-                                <Text>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
+                                <Text style={styles.deckText}>{deck.title}</Text>
+                                <Text style={styles.deckText}>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
                             </TouchableOpacity>
                         )
                     })}
@@ -57,5 +58,32 @@ const mapStateToProps = (decks) => {
         decks
     }
 }
+
+const styles = StyleSheet.create({
+    content: {
+        flex: 1,
+        justifyContent: 'flex-start',
+    },
+    title: {
+        fontSize: 24,
+        textAlign: 'center',
+        paddingTop: 10
+    },
+    deckContainer: {
+        flex: 1,
+        justifyContent: 'space-around',
+    },
+    deck: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        backgroundColor: 'lightgray',
+        margin: 10,
+    },
+    deckText: {
+        fontSize: 18,
+        padding: 20
+    }
+})
+
 
 export default connect(mapStateToProps)(DeckList)

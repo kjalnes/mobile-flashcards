@@ -20,6 +20,19 @@ function setDummyData () {
                 }
             ]
         },
+        Node: {
+            title: 'Node',
+            questions: [
+                {
+                    question: 'What is Node?',
+                    answer: 'Node.js is an open source server framework.'
+                },
+                {
+                    question: 'What Can Node.js Do?',
+                    answer: 'Node.js can generate dynamic page content, can create, open, read, write, delete, and close files on the server, can collect form data, can add, delete, modify data in your database.'
+                }
+           ]
+        },
         JavaScript: {
             title: 'JavaScript',
             questions: [
@@ -28,7 +41,7 @@ function setDummyData () {
                     answer: 'The combination of a function and the lexical environment within which that function was declared.'
                 }
            ]
-        }
+        },
     }
 
   AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(dummyData))
@@ -39,7 +52,7 @@ function setDummyData () {
 
 
 export function formatResults (results) {
-  // console.log('results', results)
+  console.log('results', results)
   return results === null
     ? setDummyData()
     : JSON.parse(results)

@@ -87,7 +87,7 @@ export default class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
             <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
-            <Text style={styles.mainTitle}>Udaci Mobile Flashcards</Text>
+            <Text style={styles.mainTitle}>MEMO FLASHCARDS</Text>
             <MainNavigator />
         </View>
       </Provider>
@@ -99,10 +99,16 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'flex-start',
         backgroundColor: '#fff',
     },
     mainTitle: {
         color: 'red',
-        fontSize: 20
+        fontSize: 25,
+        fontFamily: 'Arial',
+        letterSpacing: 5,
+        textAlign: 'center',
+        paddingTop: 20,
+        paddingBottom: 20
     }
 });
