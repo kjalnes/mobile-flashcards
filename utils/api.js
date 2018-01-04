@@ -7,6 +7,23 @@ export function getDecks () {
 }
 
 
+export function submitDeck(deck) {
+    // console.log('submitDeck being called', deck)
+    return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({[deck]: { title: deck, questions: [] }}))
+}
+
+
+
+// AsyncStorage.clear();
+
+// export function submitDeck(deck) {
+//     console.log('submitDeck being called', deck)
+//     return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify({
+//         [deck]: { title: deck, questions: []}
+//     }))
+// }
+
+
 // export function submitEntry({ entry, key }) {
 //     return AsyncStorage.mergeItem(CALENDAR_STORAGE_KEY, JSON.stringify({
 //         [key] : entry

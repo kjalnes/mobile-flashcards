@@ -53,7 +53,7 @@ class Quiz extends Component {
                             </View>
 
                         :   <View>
-                                <Text style={styles.score}>You're total score is {score/totalQuestions*100}%</Text>
+                                <Text style={styles.score}>Your total score is {score/totalQuestions*100}%</Text>
                             </View>}
                 </View>
             </View>

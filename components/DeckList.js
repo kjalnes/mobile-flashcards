@@ -35,13 +35,15 @@ class DeckList extends Component {
                 <View style={styles.deckContainer}>
                     { Object.keys(decks).map((key) => {
                         const deck = decks[key]
-                        // console.log('deck', deck)
+                        console.log('deck', deck)
                         return (
                             <TouchableOpacity style={styles.deck} key={key} onPress={() => this.props.navigation.navigate(
                                 'DeckDetails',
                                 { title: key })}>
                                 <Text style={[styles.deckText, {color: 'red'}]}>{deck.title}</Text>
-                                <Text style={styles.deckText}>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
+                                { deck && deck.questions
+                                    ? <Text style={styles.deckText}>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
+                                    : null }
                             </TouchableOpacity>
                         )
                     })}
