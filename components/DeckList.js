@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity } from 'react-native';
 import { getDecks } from '../utils/api';
 import { connect } from 'react-redux';
 import { receiveDecks } from '../actions';
+import { blue } from '../utils/colors';
 
 class DeckList extends Component {
 
@@ -19,12 +24,6 @@ class DeckList extends Component {
 
     }
 
-    renderItem = (item) => {
-        return (
-            <Text>{item.title}</Text>
-        )
-    }
-
     render () {
         const { decks } = this.props;
 
@@ -38,7 +37,7 @@ class DeckList extends Component {
                             <TouchableOpacity style={styles.deck} key={key} onPress={() => this.props.navigation.navigate(
                                 'DeckDetails',
                                 { title: key })}>
-                                <Text style={[styles.deckText, {color: 'red'}]}>{deck.title}</Text>
+                                <Text style={[styles.deckText, {color: blue}]}>{deck.title}</Text>
                                 { deck && deck.questions
                                     ? <Text style={styles.deckText}>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
                                     : null }
@@ -66,7 +65,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         textAlign: 'center',
-        paddingTop: 10
+        padding: 20
     },
     deckContainer: {
         flex: 1,

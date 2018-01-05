@@ -21,7 +21,7 @@ class AddDeck extends Component {
         return (
             <View>
                 <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1, padding: 10}}
                     onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
                 />

@@ -3,15 +3,16 @@ import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
 import DeckList from './components/DeckList';
 import AddDeck from './components/AddDeck';
 import DeckDetails from './components/DeckDetails';
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import reducer from './reducers'
-import { TabNavigator, StackNavigator } from 'react-navigation'
-import { FontAwesome, Ionicons } from '@expo/vector-icons'
-import { purple, white } from './utils/colors'
-import { Constants } from 'expo'
-import Quiz from './components/Quiz'
-import AddCard from './components/AddCard'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers';
+import { TabNavigator, StackNavigator } from 'react-navigation';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { pink, white } from './utils/colors';
+import { Constants } from 'expo';
+import Quiz from './components/Quiz';
+import AddCard from './components/AddCard';
+import { setLocalNotification } from './utils/helpers';
 
 
 
@@ -43,10 +44,10 @@ const Tabs = TabNavigator({
     header: null
   },
   tabBarOptions: {
-    activeTintColor: Platform.OS === 'ios' ? purple : white,
+    activeTintColor: Platform.OS === 'ios' ? pink : white,
     style: {
       height: 56,
-      backgroundColor: Platform.OS === 'ios' ? white : purple,
+      backgroundColor: Platform.OS === 'ios' ? white : pink,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
         width: 0,
@@ -68,7 +69,7 @@ const MainNavigator = StackNavigator({
         navigationOptions: {
             headerTintColor: white,
             headerStyle: {
-                backgroundColor: purple,
+                backgroundColor: pink,
             }
         }
     },
@@ -82,11 +83,16 @@ const MainNavigator = StackNavigator({
 
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
-            <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
+            <UdaciStatusBar backgroundColor={pink} barStyle="light-content" />
             <Text style={styles.mainTitle}>MEMO FLASHCARDS</Text>
             <MainNavigator />
         </View>

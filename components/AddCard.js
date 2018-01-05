@@ -38,15 +38,15 @@ class AddCard extends Component {
 
         return (
             <View>
-                <Text>Add question</Text>
+                <Text style={styles.subtitle}>Add question</Text>
                 <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1, padding: 10}}
                     onChangeText={(question) => this.setState({question})}
                     value={this.state.question}
                 />
-                <Text>Add answer</Text>
+                <Text style={styles.subtitle}>Add answer</Text>
                 <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1, padding: 10}}
                     onChangeText={(answer) => this.setState({answer})}
                     value={this.state.answer}
                 />
@@ -68,5 +68,12 @@ const mapStateToProps = (state, props) => {
     }
 }
 
+
+const styles = StyleSheet.create({
+    subtitle: {
+        fontSize: 18,
+        padding: 10
+    }
+});
 
 export default connect(mapStateToProps)(AddCard);

@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Platform, TouchableOpacity } from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Platform,
+    TouchableOpacity,
+    Animated } from 'react-native';
 import { connect } from 'react-redux';
 import { white, purple } from '../utils/colors';
 import Quiz from './Quiz';
@@ -7,19 +13,31 @@ import Quiz from './Quiz';
 
 
 class DeckDetails extends Component {
+    state = {
+        width: new Animated.Value(0),
+        height: new Animated.Value(0)
+    }
+
     static navigationOptions = ({ navigation }) => {
         const { title } = navigation.state.params
-
         return {
             title: title
         }
     }
 
+
+    componentDidMount() {
+        const { width, height } = this.state;
+
+        Animated.spring(width, { toValue: 370, speed: 5 }).start();
+        Animated.spring(height, { toValue: 370, speed: 5 }).start();
+    }
+
     render() {
         const { deck } = this.props;
-
+        const { height, width } = this.state;
         return (
-            <View>
+            <Animated.View style={[styles.container, {height, width}]}>
                 <Text style={styles.cardText}>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
                 <TouchableOpacity
                     style={styles.deckBtn}
@@ -35,7 +53,7 @@ class DeckDetails extends Component {
                     { title: deck.title })}>
                     <Text style={styles.btnText}>ADD CARD</Text>
                 </TouchableOpacity>
-            </View>
+            </Animated.View>
       )
     }
 }
@@ -48,10 +66,14 @@ function mapStateToProps (state, { navigation }) {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center'
+    },
     cardText: {
         fontSize: 18,
         textAlign: 'center',
-        padding: 20
+        paddingBottom: 20
     },
     deckBtn: {
         backgroundColor: purple,

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Platform, TouchableOpacity } from 'react-native
 import { connect } from 'react-redux';
 import { white, purple } from '../utils/colors';
 import Card from './Card';
+import { clearLocalNotifications, setLocalNotification } from '../utils/helpers';
 
 
 class Quiz extends Component {
@@ -33,6 +34,11 @@ class Quiz extends Component {
             cardCount: this.state.cardCount+1,
             showAnswer: false
         });
+
+        if (this.state.cardCount === this.state.totalQuestions) {
+            clearLocalNotifications()
+                .then(setLocalNotification)
+        }
     }
 
     componentDidMount() {
@@ -45,17 +51,14 @@ class Quiz extends Component {
 
         return (
             <View>
-                <View style={styles.container}>
-                    {cardCount <= totalQuestions
-                        ?   <View>
-                                <Text>{cardCount } / {totalQuestions}</Text>
-                                <Card card={deck.questions[cardId]} title={title} calcScore={this.calcScore.bind(this)} />
-                            </View>
-
-                        :   <View>
-                                <Text style={styles.score}>Your total score is {score/totalQuestions*100}%</Text>
-                            </View>}
-                </View>
+                {cardCount <= totalQuestions
+                    ? <View>
+                        <Text style={styles.cardCount}>{cardCount } / {totalQuestions}</Text>
+                        <Card style={styles.container} card={deck.questions[cardId]} title={title} calcScore={this.calcScore.bind(this)} />
+                    </View>
+                    : <View style={[styles.scoreContainer, styles.container]}>
+                          <Text style={styles.score}>Your total score is {score/totalQuestions*100}%</Text>
+                    </View>}
             </View>
         )
     }
@@ -74,11 +77,18 @@ function mapStateToProps (state, { navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-end'
+        justifyContent: 'center'
+    },
+    scoreContainer: {
+      height: 200,
+      marginTop: 200
     },
     score: {
         fontSize: 34,
         textAlign:'center'
+    },
+    cardCount: {
+        fontSize: 22
     }
 })
 export default connect(mapStateToProps)(Quiz);

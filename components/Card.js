@@ -10,7 +10,6 @@ class Card extends Component {
     }
 
     toggleShowAnswer = () => {
-        console.log(this.state)
         this.setState({showAnswer: !this.state.showAnswer});
     }
 
@@ -54,7 +53,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-start',
-        padding: 20
+        paddingLeft: 20,
+        paddingRight: 20,
 
     },
     itemText: {
