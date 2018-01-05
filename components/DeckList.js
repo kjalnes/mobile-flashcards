@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     },
     deckText: {
         fontSize: 18,
-        padding: 20
+        padding: 20,
     }
 })
 

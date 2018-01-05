@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Platform, TouchableOpacity } from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Platform,
+    TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { white, purple } from '../utils/colors';
 import Card from './Card';
@@ -54,10 +59,26 @@ class Quiz extends Component {
                 {cardCount <= totalQuestions
                     ? <View>
                         <Text style={styles.cardCount}>{cardCount } / {totalQuestions}</Text>
-                        <Card style={styles.container} card={deck.questions[cardId]} title={title} calcScore={this.calcScore.bind(this)} />
+                        <Card card={deck.questions[cardId]} title={title} calcScore={this.calcScore.bind(this)} />
                     </View>
-                    : <View style={[styles.scoreContainer, styles.container]}>
-                          <Text style={styles.score}>Your total score is {score/totalQuestions*100}%</Text>
+                    : <View>
+                           <View style={styles.scoreContainer}>
+                                <Text style={styles.score}>Your total score is {(score/totalQuestions*100).toFixed()}%</Text>
+                                <TouchableOpacity
+                                    style={styles.deckBtn}
+                                    onPress={() => this.props.navigation.navigate(
+                                    'Quiz',
+                                    { title })}>
+                                    <Text style={styles.btnText}>Do Quiz Again</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.deckBtn}
+                                    onPress={() => this.props.navigation.navigate(
+                                    'DeckDetails',
+                                    { title })}>
+                                    <Text style={styles.btnText}>View Deck</Text>
+                                </TouchableOpacity>
+                            </View>
                     </View>}
             </View>
         )
@@ -80,15 +101,33 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     scoreContainer: {
-      height: 200,
-      marginTop: 200
+        flex: 1,
+        justifyContent: 'flex-start',
+        paddingLeft: 20,
+        paddingRight: 20,
     },
     score: {
         fontSize: 34,
-        textAlign:'center'
+        textAlign:'center',
+        margin: 20
     },
     cardCount: {
         fontSize: 22
-    }
+    },
+    deckBtn: {
+        backgroundColor: purple,
+        padding: 10,
+        borderRadius: 7,
+        height: 45,
+        marginLeft: 40,
+        marginRight: 40,
+        marginTop: 10,
+        marginBottom: 10
+    },
+    btnText: {
+        color: white,
+        fontSize: 22,
+        textAlign: 'center',
+    },
 })
 export default connect(mapStateToProps)(Quiz);

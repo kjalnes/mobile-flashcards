@@ -58,11 +58,10 @@ const styles = StyleSheet.create({
 
     },
     itemText: {
-        fontSize: 20,
+        fontSize: 34,
         textAlign: 'center'
     },
     item: {
-        height: 50,
         margin: 20,
     },
     deckBtn: {

@@ -38,14 +38,19 @@ class DeckDetails extends Component {
         const { height, width } = this.state;
         return (
             <Animated.View style={[styles.container, {height, width}]}>
-                <Text style={styles.cardText}>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
-                <TouchableOpacity
-                    style={styles.deckBtn}
-                    onPress={() => this.props.navigation.navigate(
-                    'Quiz',
-                    { title: deck.title })}>
-                    <Text style={styles.btnText}>START QUIZ</Text>
-                </TouchableOpacity>
+                <Text style={styles.cardText}>
+                    {deck.questions.length} card{deck.questions.length > 1 || deck.questions.length === 0 ? 's' : ''}
+                </Text>
+                {deck.questions.length
+                    ? <TouchableOpacity
+                        style={styles.deckBtn}
+                        onPress={() => this.props.navigation.navigate(
+                        'Quiz',
+                        { title: deck.title })}>
+                        <Text style={styles.btnText}>START QUIZ</Text>
+                    </TouchableOpacity>
+                    : null }
+
                 <TouchableOpacity
                     style={styles.deckBtn}
                     onPress={() => this.props.navigation.navigate(
