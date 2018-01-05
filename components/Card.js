@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Platform, TouchableOpacity } from 'react-native
 import { connect } from 'react-redux';
 import { white, purple } from '../utils/colors';
 
-
 class Card extends Component {
     state = {
         showAnswer:false
@@ -13,13 +12,10 @@ class Card extends Component {
         this.setState({showAnswer: !this.state.showAnswer});
     }
 
-
     calcScore(answer) {
         this.setState({showAnswer: false});
         this.props.calcScore(answer);
     }
-
-
 
     render() {
         const { card, title, calcScore } = this.props;
@@ -54,8 +50,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         paddingLeft: 20,
-        paddingRight: 20,
-
+        paddingRight: 20
     },
     itemText: {
         fontSize: 34,
@@ -78,8 +73,8 @@ const styles = StyleSheet.create({
         color: white,
         fontSize: 22,
         textAlign: 'center',
-    },
-})
+    }
+});
 
 
 export default Card;

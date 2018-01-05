@@ -14,8 +14,6 @@ import Quiz from './components/Quiz';
 import AddCard from './components/AddCard';
 import { setLocalNotification } from './utils/helpers';
 
-
-
 function UdaciStatusBar ({backgroundColor, ...props}) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
@@ -100,7 +98,6 @@ export default class App extends React.Component {
     )
   }
 }
-
 
 const styles = StyleSheet.create({
     container: {

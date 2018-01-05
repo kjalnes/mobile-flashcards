@@ -10,7 +10,6 @@ import { receiveDecks } from '../actions';
 import { blue } from '../utils/colors';
 
 class DeckList extends Component {
-
     state = {
         ready: false,
     }
@@ -21,7 +20,6 @@ class DeckList extends Component {
         getDecks()
             .then( decks => dispatch(receiveDecks(decks)))
             .then(() => this.setState(() => ({ready: true})))
-
     }
 
     render () {
@@ -45,7 +43,6 @@ class DeckList extends Component {
                         )
                     })}
                 </View>
-
             </View>
         )
     }
@@ -81,7 +78,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         padding: 20,
     }
-})
+});
 
-
-export default connect(mapStateToProps)(DeckList)
+export default connect(mapStateToProps)(DeckList);

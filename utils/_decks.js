@@ -1,7 +1,6 @@
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native';
 
-export const DECK_STORAGE_KEY = 'Mobile-Flashcards:decks'
-
+export const DECK_STORAGE_KEY = 'Mobile-Flashcards:decks';
 
 function setDummyData () {
 
@@ -57,14 +56,8 @@ function setDummyData () {
   return dummyData
 }
 
-
-
 export function formatResults (results) {
-  // console.log('results', results)
   return results === null
     ? setDummyData()
     : JSON.parse(results)
 }
-
-
-

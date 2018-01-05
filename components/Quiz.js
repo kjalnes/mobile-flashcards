@@ -129,5 +129,6 @@ const styles = StyleSheet.create({
         fontSize: 22,
         textAlign: 'center',
     },
-})
+});
+
 export default connect(mapStateToProps)(Quiz);

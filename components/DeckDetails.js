@@ -25,7 +25,6 @@ class DeckDetails extends Component {
         }
     }
 
-
     componentDidMount() {
         const { width, height } = this.state;
 
@@ -37,7 +36,7 @@ class DeckDetails extends Component {
         const { deck } = this.props;
         const { height, width } = this.state;
         return (
-            <Animated.View style={[styles.container, {height, width}]}>
+            <Animated.View style={[styles.container, { height, width }]}>
                 <Text style={styles.cardText}>
                     {deck.questions.length} card{deck.questions.length > 1 || deck.questions.length === 0 ? 's' : ''}
                 </Text>
@@ -50,7 +49,6 @@ class DeckDetails extends Component {
                         <Text style={styles.btnText}>START QUIZ</Text>
                     </TouchableOpacity>
                     : null }
-
                 <TouchableOpacity
                     style={styles.deckBtn}
                     onPress={() => this.props.navigation.navigate(
@@ -59,7 +57,7 @@ class DeckDetails extends Component {
                     <Text style={styles.btnText}>ADD CARD</Text>
                 </TouchableOpacity>
             </Animated.View>
-      )
+        )
     }
 }
 
