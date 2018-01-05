@@ -7,3 +7,4 @@ To run the app, download and
 or
 * npm install and npm start
 
+This applicatiom is tested for iOS
