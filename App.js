@@ -11,7 +11,7 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { purple, white } from './utils/colors'
 import { Constants } from 'expo'
 import Quiz from './components/Quiz'
-import AddQuestion from './components/AddQuestion'
+import AddCard from './components/AddCard'
 
 
 
@@ -75,8 +75,8 @@ const MainNavigator = StackNavigator({
     Quiz: {
         screen: Quiz
     },
-    AddQuestion: {
-        screen: AddQuestion
+    AddCard: {
+        screen: AddCard
     }
 })
 

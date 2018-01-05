@@ -6,10 +6,20 @@ export function getDecks () {
         .then(formatResults)
 }
 
+// export function getDeck (title) {
+//      return AsyncStorage.getItem(DECK_STORAGE_KEY)
+//         .then(formatResults)
+//         .then( decks => decks[title])
+// }
 
 export function submitDeck(deck) {
-    // console.log('submitDeck being called', deck)
     return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({[deck]: { title: deck, questions: [] }}))
+}
+
+
+export function submitCard(title, deck, card) {
+    const questions = deck.questions.concat(card);
+    return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({[title]: { questions }}))
 }
 
 

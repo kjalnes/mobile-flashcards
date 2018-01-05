@@ -27,7 +27,6 @@ class DeckList extends Component {
 
     render () {
         const { decks } = this.props;
-        console.log(decks)
 
         return (
             <View style={styles.content}>
@@ -35,7 +34,6 @@ class DeckList extends Component {
                 <View style={styles.deckContainer}>
                     { Object.keys(decks).map((key) => {
                         const deck = decks[key]
-                        console.log('deck', deck)
                         return (
                             <TouchableOpacity style={styles.deck} key={key} onPress={() => this.props.navigation.navigate(
                                 'DeckDetails',
